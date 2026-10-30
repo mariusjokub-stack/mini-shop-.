@@ -1,0 +1,1413 @@
+.top-bar {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  width: 100%;
+
+  padding: 10px 20px;
+
+  box-sizing: border-box;
+
+}
+
+.contact-info {
+
+  display: flex;
+
+  gap: 20px;
+
+}
+
+.social-icons {
+
+  display: flex;
+
+  gap: 15px;
+
+}
+
+/* PIRMAS NAV */
+
+.nav-first {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 15px 20px;
+
+}
+
+.logo {
+
+  font-size: 24px;
+
+  font-weight: bold;
+
+}
+
+.search {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.search input {
+
+  width: 300px;
+
+  padding: 10px;
+
+  font-size: 16px;
+
+}
+
+.nav-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+}
+
+/* ANTRAS NAV */
+
+.nav-second {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 15px 20px;
+
+}
+
+.products-menu button {
+
+  border: none;
+
+  background: none;
+
+  cursor: pointer;
+
+  padding: 0;
+
+}
+
+.main-menu {
+
+  display: flex;
+
+  gap: 30px;
+
+}
+
+.products-menu button:hover {
+
+  color: #f5b400;
+
+}
+
+/* PARDUOTUVĖ */
+
+.shop-layout {
+
+  display: flex;
+
+  width: 100%;
+
+  align-items: flex-start;
+
+}
+
+/* KAIRĖ – KATEGORIJOS */
+
+.shop-sidebar {
+
+  width: 220px;
+
+  flex-shrink: 0;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+}
+
+/* DEŠINĖ – PRODUKTAI */
+
+.products-section {
+
+  flex: 1;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+}
+
+/* PRODUKTŲ KORTELĖS */
+
+.products-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 20px;
+
+}
+
+.product-card {
+
+  border: 1px solid #ddd;
+
+  padding: 5px;
+
+}
+
+.product-card img {
+
+  width: 100%;
+
+  height: 130px;
+
+  object-fit: contain;
+
+}
+
+/* KATEGORIJOS */
+
+.shop-sidebar div {
+
+  padding: 8px 0;
+
+  cursor: pointer;
+
+}
+
+.shop-sidebar div:hover {
+
+  color: #f5b400;
+
+}
+
+.products-menu {
+
+  position: relative;
+
+}
+
+.products-menu-list {
+
+  position: absolute;
+
+  top: 40px;
+
+  left: 0;
+
+  width: 320px;
+
+  background: white;
+
+  border: 1px solid #ddd;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+  z-index: 1000;
+
+  padding: 10px 0;
+
+}
+
+.products-menu-list div:hover {
+
+  background: #f5b400;
+
+}
+
+.products-menu-list div {
+
+  padding: 10px 15px;
+
+  cursor: pointer;
+
+  text-align: left;
+
+}
+
+.price-slider {
+
+  width: 100%;
+
+  padding: 10px 0;
+
+}
+
+.slider-line {
+
+  position: relative;
+
+  height: 20px;
+
+}
+
+.price-inputs input {
+
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
+
+  padding: 8px;
+
+  width: 80px;
+
+  box-sizing: border-box;
+
+}
+
+.slider-line input[type="range"] {
+
+  position: absolute;
+
+  left: 0;
+
+  top: 0;
+
+  width: 100%;
+
+  height: 20px;
+
+  margin: 0;
+
+  background: transparent;
+
+  pointer-events: none;
+
+}
+
+.slider-line input[type="range"]::-webkit-slider-thumb {
+
+  pointer-events: auto;
+
+  appearance: none;
+
+  width: 16px;
+
+  height: 16px;
+
+  border-radius: 50%;
+
+  background: #f5b400;
+
+  cursor: pointer;
+
+}
+
+.slider-line input[type="range"]::-moz-range-thumb {
+
+  pointer-events: auto;
+
+  width: 16px;
+
+  height: 16px;
+
+  border-radius: 50%;
+
+  background: #f5b400;
+
+  cursor: pointer;
+
+}
+
+.logo h3 {
+margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.logo h6 {
+
+  margin: 0;
+
+  padding: 0;
+
+  line-height: 1.2;
+
+}
+
+.logo p {
+
+  font-size: 10px;
+
+  font-weight: normal;
+
+  margin: 0;
+
+  padding: 0;
+
+  line-height: 1.2;
+
+}
+
+.social-dropdown {
+
+  position: relative;
+
+}
+
+.social-button {
+
+  background: none;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+}
+
+.social-dropdown-menu {
+
+  display: none;
+
+  position: absolute;
+
+  top: 100%;
+
+  right: 0;
+
+  min-width: 150px;
+
+  background: white;
+
+  border: 1px solid #ddd;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  z-index: 1000;
+
+}
+
+.social-dropdown:hover .social-dropdown-menu {
+
+  display: block;
+
+}
+
+.social-dropdown-menu a {
+
+  display: block;
+
+  padding: 10px 15px;
+
+  color: black;
+
+  text-decoration: none;
+
+}
+
+.social-dropdown-menu a:hover {
+
+  background: #f5b400;
+
+}
+
+/*cia yra desines puses ukis apie bites*/
+
+.right-logo {
+
+  margin-left: auto;
+
+  font-size: 15px;
+
+  font-weight: normal;
+
+  font-style: italic;
+
+  color: #8a5a00;
+
+  white-space: nowrap;
+
+}
+
+/*sirdeles*/
+
+.product-image-container {
+
+  position: relative;
+
+}
+
+.product-heart {
+
+  position: absolute;
+
+  bottom: 10px;
+
+  left: 10px;
+
+  background: white;
+
+  border: none;
+
+  border-radius: 50%;
+
+  width: 38px;
+
+  height: 38px;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+/* sirdeles pazymetos foto*/
+
+.favorite-item {
+display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.favorite-image {
+width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.favorite-details {
+
+  flex: 1;
+
+}
+
+.favorite-details p {
+
+  margin: 0 0 8px;
+
+}
+
+.favorite-item button {
+
+  cursor: pointer;
+
+}
+
+.image-modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.85);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px;
+
+  z-index: 9999;
+
+  cursor: pointer;
+
+}
+
+.image-modal img {
+
+  max-width: 90%;
+
+  max-height: 85vh;
+
+  object-fit: contain;
+
+  background: white;
+
+  border-radius: 8px;
+
+}
+
+.image-modal-close {
+
+  position: absolute;
+
+  top: 20px;
+
+  right: 25px;
+
+  font-size: 32px;
+
+  cursor: pointer;
+
+}
+
+/* ATSISKAITYMO PUSLAPIS */
+
+.checkout-page {
+
+  max-width: 1150px;
+
+  margin: 35px auto;
+
+  padding: 25px;
+
+  color: #382c1c;
+
+}
+
+.checkout-back {
+
+  border: none;
+
+  background: transparent;
+
+  color: #85601c;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  margin-bottom: 25px;
+
+}
+
+.checkout-heading {
+
+  text-align: center;
+
+  margin-bottom: 35px;
+
+}
+
+.checkout-heading span {
+
+  font-size: 42px;
+
+}
+
+.checkout-heading h1 {
+
+  margin: 8px 0;
+
+  font-size: 34px;
+
+}
+
+.checkout-heading p {
+
+  color: #817563;
+
+  margin-top: 8px;
+
+}
+
+.checkout-layout {
+
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr;
+
+  gap: 25px;
+
+  align-items: start;
+
+}
+
+
+.checkout-summary {
+position: sticky;
+  top: 20px;
+  background: #fffdf8;
+  border: 1px solid #eee3cf;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(70, 50, 20, 0.06);
+}
+
+.checkout-card h2,
+
+.checkout-summary h2 {
+
+  margin-top: 0;
+
+  margin-bottom: 24px;
+
+  font-size: 21px;
+
+}
+
+.checkout-card label {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  margin-bottom: 20px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+.checkout-card label:last-child {
+
+  margin-bottom: 0;
+
+}
+
+.checkout-card input {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  border: 1px solid #dfd4c2;
+
+  border-radius: 9px;
+
+  background: white;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+}
+
+.checkout-card input:focus {
+
+  border-color: #d7a928;
+
+  box-shadow: 0 0 0 3px rgba(229, 181, 54, 0.16);
+
+}
+
+.checkout-submit {
+
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #e5b536;
+
+  color: #30230c;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: background 0.2s, transform 0.2s;
+
+}
+
+.checkout-submit:hover {
+
+  background: #d5a321;
+
+  transform: translateY(-1px);
+
+}
+
+.checkout-note,
+
+.checkout-product {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: start;
+
+  gap: 15px;
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid #eee5d6;
+
+}
+
+.checkout-product strong {
+
+  overflow-wrap: anywhere;
+
+}
+
+.checkout-product p {
+
+  margin: 8px 0 0;
+
+  color: #817563;
+
+  font-size: 14px;
+
+}
+
+.checkout-product > span {
+
+  white-space: nowrap;
+
+  font-weight: 600;
+
+}
+
+.checkout-total {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding-top: 24px;
+
+  font-size: 17px;
+
+}
+
+.checkout-total strong {
+
+  color: #976a0b;
+
+  font-size: 25px;
+
+}
+
+.checkout-delivery {
+color: #817563;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+@media (max-width: 750px) {
+
+  .checkout-page {
+
+    padding: 15px;
+
+  }
+
+  .checkout-heading h1 {
+
+    font-size: 28px;
+
+  }
+
+  .checkout-layout {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .checkout-card,
+
+  .checkout-summary {
+
+    padding: 18px;
+
+  }
+
+  .checkout-summary {
+
+    position: static;
+
+  }
+
+}
+
+.cart-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #ddd;
+
+}
+
+.cart-item-image {
+
+  width: 70px;
+
+  height: 70px;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+
+  background: white;
+
+}
+
+.cart-item-info {
+
+  flex: 1;
+
+}
+
+.cart-item-info p {
+
+  margin: 5px 0;
+
+}
+
+.cart-quantity {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+.cart-quantity button {
+
+  width: 30px;
+
+  height: 30px;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+}
+
+.cart-item > strong {
+
+  white-space: nowrap;
+
+}
+
+.checkout-product-image {
+
+  width: 100px;
+
+  height: 100px;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+
+  background: white;
+
+  margin-bottom: 8px;
+
+}
+
+.cart-dropdown {
+
+  width: 340px;
+
+  max-width: 90vw;
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  margin: 20px auto;
+
+  background: #fff8e8;
+
+  border: 1px solid #e5c77b;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+
+  color: #333;
+
+}
+
+.cart-dropdown h3 {
+
+  color: #704214;
+
+  text-align: center;
+
+}
+
+.cart-dropdown .cart-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #eadbb8;
+
+}
+
+.cart-dropdown .cart-item-image {
+
+  width: 60px;
+
+  height: 60px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+
+  background: white;
+
+  border-radius: 8px;
+
+}
+
+.cart-dropdown .cart-item-info {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+.cart-dropdown .cart-quantity {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+}
+
+.cart-dropdown button {
+
+  cursor: pointer;
+
+  border-radius: 6px;
+
+}
+
+.cart-dropdown > button {
+
+  display: block;
+
+  width: 100%;
+
+  padding: 10px;
+
+  background: #e6ad35;
+
+  color: #2f2616;
+
+  border: none;
+
+  font-weight: bold;
+
+}
+
+.cart-dropdown > p {
+
+  text-align: center;
+
+}
+
+.login-popup {
+
+  position: fixed;
+
+  top: 120px;
+
+  right: 20px;
+
+  left: auto;
+
+  z-index: 9999;
+
+  width: 280px;
+
+  padding: 18px;
+
+  background: white;
+
+  color: #222;
+
+  border: 1px solid #ddd;
+
+  border-radius: 10px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+}
+
+.login-popup form {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+.login-popup input {
+
+  padding: 10px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
+
+}
+
+.login-popup button {
+
+  padding: 10px;
+
+  cursor: pointer;
+
+}
+
+
+
+.checkout-layout {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.checkout-form {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
+
+
+/* Pagrindinės svetainės spalvos */
+:root {
+  --honey: #f4c542;
+  --honey-dark: #e9a23b;
+  --cream: #fff9e8;
+  --brown: #6b4826;
+  --green: #355b38;
+}
+
+/* Šiltas svetainės fonas */
+body {
+  background: var(--cream);
+  color: var(--brown);
+}
+
+/* Prekių kortelės */
+.product-card {
+  background: #ffffff;
+  border: 1px solid #f0e3c5;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(107, 72, 38, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(107, 72, 38, 0.16);
+}
+
+/* Mygtukai */
+.product-card button {
+  background: var(--honey);
+  color: #3e2b16;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.product-card button:hover {
+  background: var(--honey-dark);
+}
+
+
+/* Paieškos laukelio suapvalinti kampai */
+input[placeholder="Ieškoti prekių"] {
+  border-radius: 12px;
+}
+
+
+
+
+
+/* ===== MODERNIOS SVETAINĖS SPALVOS ===== */
+:root {
+  --honey: #f4c542;
+  --honey-hover: #e8ae20;
+  --cream: #fffaf0;
+  --brown: #604321;
+  --border: #eee2c9;
+}
+
+/* ===== SVETAINĖS FONAS ===== */
+body {
+  background-color: var(--cream);
+  color: var(--brown);
+}
+
+/* ===== PAIEŠKOS LAUKELIS ===== */
+input[placeholder="Ieškoti prekių"] {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(96, 67, 33, 0.05);
+}
+
+input[placeholder="Ieškoti prekių"]:focus {
+  border-color: var(--honey-hover);
+  box-shadow: 0 0 0 3px rgba(244, 197, 66, 0.22);
+}
+
+/* ===== PREKIŲ KORTELĖS ===== */
+.product-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(96, 67, 33, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(96, 67, 33, 0.13);
+}
+
+/* ===== PREKIŲ PAVEIKSLĖLIAI ===== */
+.product-image-container {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.product-image-container img {
+  transition: transform 0.3s ease;
+}
+
+.product-image-container img:hover {
+  transform: scale(1.04);
+}
+
+/* ===== MYGTUKAI PREKIŲ KORTELĖSE ===== */
+.product-card button {
+  background: var(--honey);
+  color: #3d2a12;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.product-card button:hover {
+  background: var(--honey-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== KAINOS ===== */
+.product-card p {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--brown);
+}
+
+/* ===== ĮVESTIES LAUKELIAI ===== */
+input,
+select,
+textarea {
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--honey-hover);
+}
+
+/* ===== PUSLAPIŲ MYGTUKAI ===== */
+.pagination button {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover {
+  background: var(--honey);
+  border-color: var(--honey);
+}
+
+/* ===== ATSISKAITYMO KORTELĖS ===== */
+.checkout-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 4px 14px rgba(96, 67, 33, 0.06);
+}
+
+/* ===== ATSISKAITYMO MYGTUKAS ===== */
+.checkout-submit {
+  background: var(--honey);
+  color: #3d2a12;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.checkout-submit:hover {
+  background: var(--honey-hover);
+}
+
+
+
+/* Meniu mygtukai */
+nav a,
+nav button,
+.nav-link,
+.login-button {
+  border-radius: 12px;
+  padding: 10px 16px;
+  transition: all 0.25s ease;
+}
+
+/* Efektas užvedus pelę */
+nav a:hover,
+nav button:hover,
+.nav-link:hover,
+.login-button:hover {
+  background-color: #f4c542;
+  color: #4b351b;
+}
+
+/* Prisijungimo mygtukas */
+.login-button {
+  border: 1px solid #e9c45b;
+  background-color: #fff8e6;
+  cursor: pointer;
+}
+
+/* Širdelės mygtukas */
+.product-heart {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f0dfb5;
+  background-color: #fffaf0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Širdelės efektas */
+.product-heart:hover {
+  background-color: #ffe5e5;
+  border-color: #e8a0a0;
+  transform: scale(1.1);
+}
+
+
+
+/* Mokėjimo būdų pasirinkimas */
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #eee2c9;
+  border-radius: 14px;
+  background: #fffdf7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-option:hover {
+  border-color: #e9b72e;
+  background: #fff7df;
+}
+
+.payment-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #d99b16;
+  cursor: pointer;
+}
+
+.payment-option span {
+  font-weight: 600;
+  color: #604321;
+}
+
+.payment-note {
+  font-size: 13px;
+  color: #806b4e;
+  margin-top: 14px;
+}
