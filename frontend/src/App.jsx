@@ -151,8 +151,8 @@ const decreaseQuantity = (productId) => {
         .toLowerCase()
         .includes(searchText.toLowerCase())
 
-      const categoryMatch =
-        !selectedCategory || product.category === selectedCategory
+     const categoryMatch =
+  !selectedCategory || product.category?.name === selectedCategory
 
       const priceMatch =
         (!minPrice || product.price >= Number(minPrice)) &&
@@ -277,17 +277,19 @@ return (
       />
 
       <Route
-        path="/checkout"
-        element={
-          <Checkout
-            onBack={() => navigate("/cart")}
-            onContinue={(paymentMethod) => {
-              setSelectedPayment(paymentMethod)
-              navigate("/payment")
-            }}
-          />
-        }
-      />
+  path="/checkout"
+  element={
+    <Checkout
+      cart={cart}
+      onBack={() => navigate("/cart")}
+      onContinue={(paymentMethod) => {
+        setSelectedPayment(paymentMethod)
+        navigate("/payment")
+      }}
+    />
+  }
+/>
+      
 
       <Route
         path="/payment"

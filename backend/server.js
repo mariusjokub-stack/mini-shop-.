@@ -4,9 +4,10 @@ const cors = require("cors");
 const Product = require("./models/Product");
 const Category = require("./models/Category");
 const User = require("./models/User");
+const Order = require("./models/Order");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const authMiddleware = require("./middleware/authMiddleware");
 
 
 
@@ -111,7 +112,7 @@ mongoose
 
 
 
-app.post("/products", async (req, res) => {
+app.post("/products", authMiddleware, async (req, res) => {
 
     console.log(req.body);
   try {
@@ -121,7 +122,92 @@ app.post("/products", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+// SUKURTI IR IŠSAUGOTI UŽSAKYMĄ
+app.post("/orders", async (req, res) => {
+  try {
+    const { customer, address, items } = req.body
 
+    // Patikriname pirkėjo duomenis
+    if (
+      !customer?.name?.trim() ||
+      !customer?.phone?.trim() ||
+      !customer?.email?.trim() ||
+      !address?.trim()
+    ) {
+      return res.status(400).json({
+        message: "Užpildykite pirkėjo duomenis ir pristatymo adresą",
+      })
+    }
+
+    // Patikriname užsakytas prekes
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        message: "Užsakymas turi turėti bent vieną prekę",
+      })
+    }
+
+    const orderItems = []
+
+    // Tikriname prekes MongoDB duomenų bazėje
+    for (const item of items) {
+      if (
+        !mongoose.isValidObjectId(item.productId) ||
+        !Number.isInteger(item.quantity) ||
+        item.quantity < 1
+      ) {
+        return res.status(400).json({
+          message: "Netinkami prekės duomenys arba kiekis",
+        })
+      }
+
+      const product = await Product.findById(item.productId)
+
+      if (!product) {
+        return res.status(404).json({
+          message: "Viena iš užsakytų prekių nerasta",
+        })
+      }
+
+      orderItems.push({
+        productId: product._id,
+        title: product.title,
+        price: product.price,
+        quantity: item.quantity,
+      })
+    }
+
+    // Apskaičiuojame sumą backend dalyje
+    const total = orderItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    )
+
+    // Išsaugome užsakymą MongoDB
+    const order = await Order.create({
+      customer,
+      address,
+      items: orderItems,
+      total,
+    })
+
+    res.status(201).json({
+      message: "Užsakymas sėkmingai išsaugotas!",
+      order,
+    })
+  } catch (error) {
+    console.error("Užsakymo klaida:", error)
+
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        message: error.message,
+      })
+    }
+
+    res.status(500).json({
+      message: "Nepavyko išsaugoti užsakymo",
+    })
+  }
+})
 
 
 
@@ -130,10 +216,96 @@ app.get("/", (req, res) => {
   res.send("Mini Shop backend veikia!");
 });
 
+// GAUTI VISUS UŽSAKYMUS
+app.get("/orders", async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 })
+
+    res.json(orders)
+  } catch (error) {
+    console.error("Užsakymų gavimo klaida:", error)
+
+    res.status(500).json({
+      message: "Nepavyko gauti užsakymų",
+    })
+  }
+})
+
+// GAUTI VIENĄ UŽSAKYMĄ PAGAL ID
+app.get("/orders/:id", async (req, res) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Neteisingas užsakymo ID",
+      })
+    }
+
+    const order = await Order.findById(req.params.id)
+
+    if (!order) {
+      return res.status(404).json({
+        message: "Užsakymas nerastas",
+      })
+    }
+
+    res.json(order)
+  } catch (error) {
+    res.status(500).json({
+      message: "Nepavyko gauti užsakymo",
+    })
+  }
+})
+
+
+// PAKEISTI UŽSAKYMO BŪSENĄ
+app.put("/orders/:id", async (req, res) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Neteisingas užsakymo ID",
+      })
+    }
+
+    const { status } = req.body
+
+    const allowedStatuses = ["Pending", "Confirmed", "Shipped"]
+
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        message: "Neteisinga užsakymo būsena",
+      })
+    }
+
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true, runValidators: true }
+    )
+
+    if (!order) {
+      return res.status(404).json({
+        message: "Užsakymas nerastas",
+      })
+    }
+
+    res.json({
+      message: "Užsakymo būsena atnaujinta",
+      order,
+    })
+  } catch (error) {
+    console.error("Užsakymo atnaujinimo klaida:", error)
+
+    res.status(500).json({
+      message: "Nepavyko atnaujinti užsakymo",
+    })
+  }
+})
+
+
 
 app.get("/products", async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("category");
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -141,7 +313,7 @@ app.get("/products", async (req, res) => {
 });
 app.get("/products/:id", async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate("category");
     if (!product) {
       return res.status(404).json({ message: "Prekė nerasta" });
     }
@@ -283,7 +455,7 @@ app.delete("/categories/:id", async (req, res) => {
 
 
 
-app.delete("/products/:id", async (req, res) => {
+app.delete("/products/:id", authMiddleware, async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
 

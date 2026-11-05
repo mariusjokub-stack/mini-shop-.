@@ -1,13 +1,60 @@
 
-function Checkout({ onBack, onContinue }) {
-  function handleSubmit(e) {
-    e.preventDefault()
+function Checkout({ cart, onBack, onContinue }) {
+ async function handleSubmit(e) {
+  e.preventDefault()
 
-    const formData = new FormData(e.currentTarget)
-    const paymentMethod = formData.get("paymentMethod")
+  const formData = new FormData(e.currentTarget)
+
+  const paymentMethod = formData.get("paymentMethod")
+
+  const orderData = {
+    customer: {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+    },
+
+    address: [
+      formData.get("street"),
+      formData.get("houseNumber"),
+      formData.get("apartment"),
+      formData.get("city"),
+      formData.get("postalCode"),
+      formData.get("country"),
+    ]
+      .filter(Boolean)
+      .join(", "),
+
+    items: cart.map((product) => ({
+      productId: product._id,
+      quantity: product.quantity,
+    })),
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.message || "Užsakymo išsaugoti nepavyko")
+      return
+    }
+
+    alert("Užsakymas sėkmingai išsaugotas!")
 
     onContinue(paymentMethod)
+  } catch (error) {
+    console.error("Užsakymo klaida:", error)
+    alert("Nepavyksta susisiekti su serveriu.")
   }
+}
 
   return (
     <div className="checkout-page">
