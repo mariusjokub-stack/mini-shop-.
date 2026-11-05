@@ -1,4 +1,7 @@
+
+
 import { useEffect, useState } from "react"
+import { Route, Routes, useNavigate } from "react-router"
 import "./App.css"
 import Header from "./components/Header"
 import Cart from "./components/Cart"
@@ -16,6 +19,7 @@ import Payment from "./pages/Payment"
 
 
 function App() {
+  const navigate = useNavigate()
   const [selectedProduct, setSelectedProduct] = useState(null)
 
   const [favorites, setFavorites] = useState(() => {
@@ -26,6 +30,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites))
   }, [favorites])
+  
 
   function toggleFavorite(productId) {
     setFavorites((prevFavorites) =>
@@ -42,7 +47,18 @@ const productsPerPage = 6
 
 
   const [searchText, setSearchText] = useState("")
-  const [cart, setCart] = useState([])
+
+
+  const [cart, setCart] = useState(() => {
+  const savedCart = localStorage.getItem("cart")
+  return savedCart ? JSON.parse(savedCart) : []
+})
+useEffect(() => {
+  localStorage.setItem("cart", JSON.stringify(cart))
+}, [cart])
+
+
+
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState("")
 
@@ -167,123 +183,130 @@ const decreaseQuantity = (productId) => {
   )
 
  
+return (
+  <div>
+    <Header
+      searchText={searchText}
+      setSearchText={setSearchText}
+      setCurrentPage={setCurrentPage}
+      favorites={favorites}
+      setShowFavorites={setShowFavorites}
+      showFavorites={showFavorites}
+      setShowCart={setShowCart}
+      total={total}
+      showLogin={showLogin}
+      setShowLogin={setShowLogin}
+      showRegister={showRegister}
+      setShowRegister={setShowRegister}
+      categories={categories}
+      showProductsMenu={showProductsMenu}
+      setShowProductsMenu={setShowProductsMenu}
+      setSelectedCategory={setSelectedCategory}
+      setShowProducts={setShowProducts}
+      setShowAbout={setShowAbout}
+      setShowContacts={setShowContacts}
+      setSelectedProduct={setSelectedProduct}
+      setShowCheckout={setShowCheckout}
+      setMinPrice={setMinPrice}
+      setMaxPrice={setMaxPrice}
+    />
 
-
-  return (
-    <div>
-
-      
-
-      {showPayment ? (
-  <Payment
-    selectedPayment={selectedPayment}
-    onBack={() => {
-      setShowPayment(false)
-      setShowCheckout(true)
-    }}
-  />
-
-   ) : showCheckout ? (
-  <Checkout
-    onBack={() => setShowCheckout(false)}
-    onContinue={(paymentMethod) => {
-      setSelectedPayment(paymentMethod)
-      setShowCheckout(false)
-      setShowPayment(true)
-    }}
+    <Routes>
+      <Route
+        path="/"
+        element={<Home onOpenProducts={() => navigate("/products")} />}
       />
 
-
-
-      ) : showFavorites ? (
-        <Favorites
-          products={products}
-          favorites={favorites}
-          onToggleFavorite={toggleFavorite}
-          onClose={() => setShowFavorites(false)}
-        />
-
-
-     
-
-
-           ) : showCart ? (
-        <Cart
-          cart={cart}
-          increaseQuantity={increaseQuantity}
-          decreaseQuantity={decreaseQuantity}
-          total={total}
-          setShowCheckout={setShowCheckout}
-          setShowCart={setShowCart}
-        />
-      ) : (
-        <>
-
-
-
-                    <Header
-            searchText={searchText}
-            setSearchText={setSearchText}
+      <Route
+        path="/products"
+        element={
+          <Products
+            selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
+            minPrice={minPrice}
+            setMinPrice={setMinPrice}
+            maxPrice={maxPrice}
+            setMaxPrice={setMaxPrice}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            currentProducts={currentProducts}
+            totalPages={totalPages}
+            currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             favorites={favorites}
-            setShowFavorites={setShowFavorites}
-            showFavorites={showFavorites}
-            setShowCart={setShowCart}
-            total={total}
-            showLogin={showLogin}
-            setShowLogin={setShowLogin}
-            showRegister={showRegister}
-            setShowRegister={setShowRegister}
-            categories={categories}
-            showProductsMenu={showProductsMenu}
-            setShowProductsMenu={setShowProductsMenu}
-            setSelectedCategory={setSelectedCategory}
-            setShowProducts={setShowProducts}
-            setShowAbout={setShowAbout}
-            setShowContacts={setShowContacts}
-            setSelectedProduct={setSelectedProduct}
-            setShowCheckout={setShowCheckout}
-            setMinPrice={setMinPrice}
-            setMaxPrice={setMaxPrice}
+            toggleFavorite={toggleFavorite}
+            addToCart={addToCart}
           />
+        }
+      />
 
-          {showContacts ? (
-            <Contacts
-              onBack={() => {
-                setShowContacts(false)
-                setShowAbout(false)
-              }}
-            />
-          ) : showAbout ? (
-            <About onBack={() => setShowAbout(false)} />
-          ) : showProducts ? (
-            <Products
-              selectedProduct={selectedProduct}
-              setSelectedProduct={setSelectedProduct}
-              minPrice={minPrice}
-              setMinPrice={setMinPrice}
-              maxPrice={maxPrice}
-              setMaxPrice={setMaxPrice}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-              currentProducts={currentProducts}
-              totalPages={totalPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              favorites={favorites}
-              toggleFavorite={toggleFavorite}
-              addToCart={addToCart}
-            />
-          ) : (
-            <Home onOpenProducts={() => setShowProducts(true)} />
-          )}
-              </>
-      )}
+      <Route
+        path="/about"
+        element={<About onBack={() => navigate("/")} />}
+      />
 
-      <Footer />
-    </div>
-  )
+      <Route
+        path="/contacts"
+        element={<Contacts onBack={() => navigate("/")} />}
+      />
+
+      <Route
+        path="/favorites"
+        element={
+          <Favorites
+            products={products}
+            favorites={favorites}
+            onToggleFavorite={toggleFavorite}
+            onClose={() => navigate("/")}
+          />
+        }
+      />
+
+      <Route
+        path="/cart"
+        element={
+          <Cart
+            cart={cart}
+            increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
+            total={total}
+            setShowCheckout={() => navigate("/checkout")}
+            setShowCart={() => navigate("/")}
+          />
+        }
+      />
+
+      <Route
+        path="/checkout"
+        element={
+          <Checkout
+            onBack={() => navigate("/cart")}
+            onContinue={(paymentMethod) => {
+              setSelectedPayment(paymentMethod)
+              navigate("/payment")
+            }}
+          />
+        }
+      />
+
+      <Route
+        path="/payment"
+        element={
+          <Payment
+            selectedPayment={selectedPayment}
+            onBack={() => navigate("/checkout")}
+          />
+        }
+      />
+    </Routes>
+
+    <Footer />
+  </div>
+)
 }
+
+
+ 
 
 export default App
 

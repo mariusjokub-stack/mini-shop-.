@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router"
+
 function Header({
   searchText,
   setSearchText,
@@ -23,6 +25,8 @@ function Header({
   setMinPrice,
   setMaxPrice,
 }) {
+  const navigate = useNavigate()
+
   return (
     <header>
       <div className="top-bar">
@@ -60,20 +64,18 @@ function Header({
             placeholder="🔍 Ieškoti prekių"
             value={searchText}
             onChange={(event) => {
-              setSearchText(event.target.value)
-              setShowProducts(true)
-              setCurrentPage(1)
-            }}
+  setSearchText(event.target.value)
+  setCurrentPage(1)
+  setSelectedProduct(null)
+  navigate("/products")
+}}
           />
         </div>
 
         <button
           className="heart-button"
           title="Mėgstamiausios prekės"
-          onClick={() => {
-            setShowFavorites(!showFavorites)
-            setShowCart(false)
-          }}
+       onClick={() => navigate("/favorites")}
         >
           ❤️ {favorites.length}
         </button>
@@ -81,10 +83,7 @@ function Header({
         <button
           type="button"
           title="Krepšelis"
-          onClick={() => {
-            setShowCart(true)
-            setShowFavorites(false)
-          }}
+          onClick={() => navigate("/cart")}
         >
           🛒
         </button>
@@ -224,25 +223,27 @@ function Header({
 
           {showProductsMenu && (
             <div className="products-menu-list">
-              <div
-                onClick={() => {
-                  setSelectedCategory("")
-                  setShowProducts(true)
-                  setShowProductsMenu(false)
-                  setCurrentPage(1)
-                }}
-              >
-                Visos prekės
-              </div>
+          <div
+  onClick={() => {
+    setSelectedCategory("")
+    setShowProductsMenu(false)
+    setCurrentPage(1)
+    navigate("/products")
+  }}
+>
+  Visos prekės
+</div>
+
+
               {categories.map((category) => (
                 <div
                   key={category._id}
-                  onClick={() => {
-                    setSelectedCategory(category.name)
-                    setShowProducts(true)
-                    setShowProductsMenu(false)
-                    setCurrentPage(1)
-                  }}
+             onClick={() => {
+  setSelectedCategory(category.name)
+  setShowProductsMenu(false)
+  setCurrentPage(1)
+  navigate("/products")
+}}
                 >
                   {category.name}
                 </div>
@@ -250,56 +251,36 @@ function Header({
             </div>
           )}
         </div>
-
         <div className="main-menu">
-          <button
-            type="button"
-            onClick={() => {
-              setShowAbout(false)
-              setShowContacts(false)
-              setSelectedProduct(null)
-              setShowCart(false)
-              setShowFavorites(false)
-              setShowCheckout(false)
-              setShowProductsMenu(false)
-              setShowProducts(false)
-              setSelectedCategory("")
-              setMinPrice("")
-              setMaxPrice("")
-              setSearchText("")
-              setCurrentPage(1)
-            }}
-          >
-            Pradinis
-          </button>
+   <button
+  type="button"
+  onClick={() => {
+    setSelectedProduct(null)
+    setSelectedCategory("")
+    setMinPrice("")
+    setMaxPrice("")
+    setSearchText("")
+    setCurrentPage(1)
+    setShowProductsMenu(false)
+    navigate("/")
+  }}
+>
+  Pradinis
+</button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setShowAbout(true)
-              setShowContacts(false)
-              setSelectedProduct(null)
-              setShowCart(false)
-              setShowFavorites(false)
-              setShowCheckout(false)
-            }}
-          >
-            Apie mus
-          </button>
+      <button
+  type="button"
+  onClick={() => navigate("/about")}
+>
+  Apie mus
+</button>    
 
-          <button
-            type="button"
-            onClick={() => {
-              setShowContacts(true)
-              setShowAbout(false)
-              setSelectedProduct(null)
-              setShowCart(false)
-              setShowFavorites(false)
-              setShowCheckout(false)
-            }}
-          >
-            Kontaktai
-          </button>
+         <button
+  type="button"
+  onClick={() => navigate("/contacts")}
+>
+  Kontaktai
+</button>
         </div>
 
         <div className="right-logo">🐝 Sveikos bitės – stiprus ūkis!</div>
