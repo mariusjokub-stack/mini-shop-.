@@ -124,6 +124,55 @@
 
 /* PARDUOTUVĖ */
 
+.home-page {
+  display: grid;
+  min-height: 420px;
+  place-items: center;
+  padding: 40px 20px;
+  text-align: center;
+  background: #fff8e5;
+}
+
+.home-welcome {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-bee {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.home-welcome h1 {
+  color: #493400;
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.25;
+  letter-spacing: normal;
+  margin: 8px 0;
+}
+
+.home-welcome p {
+  line-height: 1.5;
+}
+
+.home-products-button {
+  margin-top: 16px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 6px;
+  background: #f5b400;
+  color: #2f2500;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.home-products-button:hover {
+  background: #e7a800;
+}
+
 .shop-layout {
 
   display: flex;
@@ -1410,4 +1459,44 @@ nav button:hover,
   font-size: 13px;
   color: #806b4e;
   margin-top: 14px;
+}
+
+.shop-sidebar,
+.filter-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.filter-sidebar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-sidebar h4 {
+  margin: 0;
+}
+
+.filter-sidebar .price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-sidebar .price-inputs label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.filter-sidebar .price-inputs input {
+  width: 60px;
+}
+
+.filter-sidebar .price-slider {
+  width: auto;
+  padding: 0;
 }
